@@ -21,24 +21,27 @@ public class Descifrador {
 
         //Argumentos
         String nombreDelFichero=args[0];
-        int key=Integer.valueOf(args[1]);
+            String nombreDelFichroSinExtension=nombreDelFichero.substring(0,nombreDelFichero.lastIndexOf("."));
+            String extensionDelFichero = nombreDelFichero.substring(nombreDelFichero.lastIndexOf("."));
+        int key = Integer.parseInt(args[1]);
+
         //Archivo que hay que descifrar
-
-
-
-
-
-
-
         File archivo1 = new File("src"+slash+"datos"+slash+nombreDelFichero);
 
+        //Nuevo archivo
+        File nuevoArchivo1 = new File("src"+slash+"datos"+slash+nombreDelFichroSinExtension+".nuevo"+extensionDelFichero);
 
 
+
+
+
+        System.out.println(nuevoArchivo1.getAbsolutePath());
+        //path.substring(archivo1.lastIndexOf("."));    Devuelve
         if(args.length==2) {
             if (archivo1.exists()) {
                 try {
-                    int character='1';
-                    int pos;
+                    int character;
+
 
                     System.out.println("Starting");
 
@@ -48,7 +51,7 @@ public class Descifrador {
                     //character agarra la primera letra, si no la hay agarra -1
                     character=frArchivo1.read();
                     while(character!=-1) {
-                        ;
+
                         //Para cada caracter del archivo:
                         //
                         for (int i=0; i<arrayAbecedarioMayuscula.length;i++) {
@@ -90,10 +93,6 @@ public class Descifrador {
 
                     //! Cierra el archivo
                     frArchivo1.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-
-
                 }catch (IOException e){
                     e.printStackTrace();
                 }
