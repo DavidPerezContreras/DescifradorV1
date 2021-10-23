@@ -29,13 +29,13 @@ public class Descifrador {
         File archivo1 = new File("src"+slash+"datos"+slash+nombreDelFichero);
 
         //Nuevo archivo
-        File nuevoArchivo1 = new File("src"+slash+"datos"+slash+nombreDelFichroSinExtension+".nuevo"+extensionDelFichero);
+        //File nuevoArchivo1 = new File("src"+slash+"datos"+slash+nombreDelFichroSinExtension+".nuevo"+extensionDelFichero);
 
 
 
 
 
-        System.out.println(nuevoArchivo1.getAbsolutePath());
+        System.out.println(archivo1.getAbsolutePath());
         //path.substring(archivo1.lastIndexOf("."));    Devuelve
         if(args.length==2) {
             if (archivo1.exists()) {
