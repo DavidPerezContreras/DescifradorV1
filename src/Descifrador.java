@@ -13,10 +13,10 @@ public class Descifrador {
 
 
 
-    public static void main(String[] args) {
-        //Separador del sistema operativo
+    public static void main(String[] args){
+        //Separador espedifico del sistema operativo
         String slash=System.getProperty("os.name").startsWith("Windows")?"\\":"/";
-        boolean fileExists=true;
+
         final char arrayAbecedarioMayuscula[] = new char[]{
                 'A', 'B', 'C','D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
         };
@@ -33,20 +33,21 @@ public class Descifrador {
 
         //Archivo que hay que descifrar
 
+        File archivo1 = new File("src"+slash+"datos"+nombreDelFichero);
 
-        try {
-            File archivo1 = new File("src"+slash+"datos"+nombreDelFichero);
-            FileReader frArchivo1 = new FileReader(archivo1);
-        } catch (FileNotFoundException e) {
-            System.err.println("No se ha encontrado el archivo");
-            fileExists=false;
-
-
-        }finally {
-            if(fileExists){
-
+        if(archivo1.exists()){
+            try {
+                FileReader frArchivo1 = new FileReader(archivo1);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
+        }else{
+            System.out.println("No se ha encontrado el archivo");
         }
+
+
+
+
 
 
     }
