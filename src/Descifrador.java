@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Descifrador {
 
@@ -34,6 +31,9 @@ public class Descifrador {
 
 
         File archivo1 = new File("src"+slash+"datos"+slash+nombreDelFichero);
+
+
+
         if(args.length==2) {
             if (archivo1.exists()) {
                 try {
@@ -51,13 +51,13 @@ public class Descifrador {
                         ;
                         //Para cada caracter del archivo:
                         //
-                        for (int i=0; i<arrayAbecedarioMayuscula.length-1;i++) {
+                        for (int i=0; i<arrayAbecedarioMayuscula.length;i++) {
                             if(arrayAbecedarioMayuscula[i]==(char)character){
                                 System.out.print(arrayAbecedarioMayuscula[(i-key)%arrayAbecedarioMayuscula.length]);
                             }
                         }
 
-                        for (int i=0; i<arrayAbecedarioMinuscula.length-1;i++) {
+                        for (int i=0; i<arrayAbecedarioMinuscula.length;i++) {
                             if(arrayAbecedarioMinuscula[i]==(char)character){
                                 System.out.print(arrayAbecedarioMinuscula[(i-key)%arrayAbecedarioMayuscula.length]);
                             }
