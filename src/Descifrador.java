@@ -96,7 +96,7 @@ public class Descifrador {
                         e.printStackTrace();
                     }
                 } else {
-                    System.out.println("No se ha encontrado el archivo");
+                    System.out.println("No se ha encontrado el archivo!");
                 }
 
             }else{System.out.println("Debes proporcionar 2 argumentos");}
