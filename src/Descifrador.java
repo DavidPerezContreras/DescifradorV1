@@ -34,6 +34,9 @@ public class Descifrador {
             final File archivoNuevo1 = nombreDelFichero.contains(".")?new File("src" + slash + "datos" + slash + nombreDelFicheroSinExtension + ".nuevo" + extensionDelFichero):new File("src" + slash + "datos" + slash + nombreDelFichero + ".nuevo" );
 
 
+
+
+
             if (archivo1.exists() && archivoNuevo1.exists() ) {//Comprueba que los archivos con los que va a trabajar existen (Si archivoNuevo1 no existe, tampoco lo crea
 
                 try {
@@ -41,12 +44,13 @@ public class Descifrador {
                     FileWriter fwArchivoNuevo1 = new FileWriter(archivoNuevo1);
 
 
-                    int characterSelected = frArchivo1.read();
+                    int characterSelected = frArchivo1.read();//Variable utilizada para leer del archivo
                     boolean isLetter;//Almacena en cada vuelta del siguiente while si el character que maneja es una letra o no
                     while (characterSelected != -1) {
                         isLetter = false;
                         //Para cada caracter del archivo:
-                        if (key < 0) { //Si key es mayor que cero cifra
+                        if (key > 0) { //Si key es mayor que cero cifra
+                            System.out.println("Cifrando..");
                             for (int i = 0; i < arrayAbecedarioMayuscula.length; i++) {     //Recorre el abecedario en Mayuscula y si coincide lo escribe en archivoNuevo1
                                 if (arrayAbecedarioMayuscula[i] == (char) characterSelected) {
                                     fwArchivoNuevo1.write(arrayAbecedarioMayuscula[(i + key) % arrayAbecedarioMayuscula.length]);
@@ -62,9 +66,10 @@ public class Descifrador {
 
                         }
 
-                        if (key > 0) {                          //Si key es mayor que cero cifra
-                            for (int i = 0; i < arrayAbecedarioMinuscula.length; i++) {
-                                if (key > 0) {
+                        if (key < 0) {                          //Si key es menor que cero descifra
+                            System.out.println("Descifrando...");
+                            for (int i = 0; i < arrayAbecedarioMinuscula.length; i++) {//Recorre el abecedario en Minuscula y si coincide lo escribe en archivoNuevo1
+
                                     if (arrayAbecedarioMinuscula[i] == (char) characterSelected) {
                                         fwArchivoNuevo1.write(arrayAbecedarioMinuscula[(i + key) % arrayAbecedarioMinuscula.length]);
                                         isLetter = true;
@@ -72,7 +77,7 @@ public class Descifrador {
                                     if (arrayAbecedarioMayuscula[i] == (char) characterSelected) {
                                         fwArchivoNuevo1.write(arrayAbecedarioMayuscula[(i + key) % arrayAbecedarioMayuscula.length]);
                                         isLetter = true;
-                                    }
+
                                 }
                             }
                         }
