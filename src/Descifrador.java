@@ -26,15 +26,11 @@ public class Descifrador {
             final String nombreDelFichroSinExtension=nombreDelFichero.substring(0,nombreDelFichero.lastIndexOf("."));
             final String extensionDelFichero = nombreDelFichero.substring(nombreDelFichero.lastIndexOf("."));
 
-
-
             //Archivo que hay que descifrar
             final File archivo1 = new File("src"+slash+"datos"+slash+nombreDelFichero);
             //Archivo nuevo que almacena el resultado
             final File archivoNuevo1 = new File("src"+slash+"datos"+slash+nombreDelFichroSinExtension+".nuevo"+extensionDelFichero);
 
-
-            String resultado="";
 
             if (archivo1.exists()&&archivoNuevo1.exists()) {
 
@@ -45,34 +41,53 @@ public class Descifrador {
 
 
                     int character=frArchivo1.read();
-                    boolean isLetter=false;//Almacena en cada vuelta del siguiente while si el character que maneja es una letra o no
+                    boolean isLetter;//Almacena en cada vuelta del siguiente while si el character que maneja es una letra o no
                     while(character!=-1) {
                         isLetter=false;
                         //Para cada caracter del archivo:
                         //
                         for (int i=0; i<arrayAbecedarioMayuscula.length;i++) {
-                            if(arrayAbecedarioMayuscula[i]==(char)character&&key<0){
-                                fwArchivoNuevo1.write(arrayAbecedarioMayuscula[(i+key)%arrayAbecedarioMayuscula.length]);
-                                isLetter=true;
-                            }
-                            if(arrayAbecedarioMayuscula[i]==(char)character&&key>0){
-                                fwArchivoNuevo1.write(arrayAbecedarioMayuscula[(i+key)%arrayAbecedarioMayuscula.length]);
-                                isLetter=true;
+
+                            if (key<0){
+                                if(arrayAbecedarioMayuscula[i]==(char)character){
+                                    fwArchivoNuevo1.write(arrayAbecedarioMayuscula[(i+key)%arrayAbecedarioMayuscula.length]);
+                                    isLetter=true;
+                                }
+
+                                if(arrayAbecedarioMinuscula[i]==(char)character){
+                                    fwArchivoNuevo1.write(arrayAbecedarioMinuscula[(i+key)%arrayAbecedarioMinuscula.length]);
+                                    isLetter=true;
+                                }
+
                             }
 
-                        }
-                        for (int i=0; i<arrayAbecedarioMinuscula.length;i++) {
-                            if(arrayAbecedarioMinuscula[i]==(char)character&&key<0){
-                                fwArchivoNuevo1.write(arrayAbecedarioMinuscula[(i+key)%arrayAbecedarioMinuscula.length]);
-                                isLetter=true;
-                            }
-                            if(arrayAbecedarioMinuscula[i]==(char)character&&key>0){
-                                fwArchivoNuevo1.write(arrayAbecedarioMinuscula[(i+key)%arrayAbecedarioMinuscula.length]);
-                                isLetter=true;
-                            }
+
                         }
 
-                        if(!isLetter){//Si no es una letra imprime el carácter directamente
+                        if(key>0){
+                            for (int i=0; i<arrayAbecedarioMinuscula.length;i++) {
+                                if(key>0) {
+                                    if (arrayAbecedarioMinuscula[i] == (char) character) {
+                                        fwArchivoNuevo1.write(arrayAbecedarioMinuscula[(i + key) % arrayAbecedarioMinuscula.length]);
+                                        isLetter = true;
+                                    }
+                                    if (arrayAbecedarioMayuscula[i] == (char) character) {
+                                        fwArchivoNuevo1.write(arrayAbecedarioMayuscula[(i + key) % arrayAbecedarioMayuscula.length]);
+                                        isLetter = true;
+
+
+                                    }
+
+                                }
+
+
+                                }
+                        }
+
+
+
+
+                        if(!isLetter||key==0){//Si no es una letra imprime el carácter directamente
                             fwArchivoNuevo1.write((char)character);
                         }
                         character=frArchivo1.read();
